@@ -6,6 +6,9 @@
 {{- if not (eq (printf "%s" $.Values.ingress.tls) (printf "%s" false)) }}
   {{- if eq (printf "%s" $.Values.ingress.tls) (printf "%s" true) }}
   {{- if $.Values.ingress.name }}
+    {{- $tlsSecretName = (printf "tls-%s" $.Values.ingress.tlsSecretName) }}
+  {{- else }}
+  {{- if $.Values.ingress.name }}
     {{- $tlsSecretName = (printf "tls-%s" $.Values.ingress.name) }}
   {{- else }}
   {{- if $.Values.service.name }}
